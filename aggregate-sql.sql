@@ -28,7 +28,7 @@ FROM Products;
 -- Ex 6:
 
 SELECT SupplierID AS num_of_suppliers,
-    AVG(UnitsInStock) AS avg_num_items
+    COUNT(*) AS num_items
 FROM Products
 GROUP BY SupplierID;
 
@@ -41,13 +41,16 @@ GROUP BY CategoryID;
 
 -- Ex 8:
 
-SELECT SupplierID, COUNT(UnitsInStock)
+SELECT SupplierID, COUNT(*) AS num_of_items
 FROM Products
 GROUP BY SupplierID
-HAVING COUNT(UnitsInStock) <= 5;
+HAVING COUNT(*) >= 5;
 
 -- Ex 9:
 
-SELECT ProductID, ProductName, SUM(UnitPrice * UnitsInStock) AS inventory_value
+SELECT 
+    ProductID, 
+    ProductName, 
+    UnitPrice * UnitsInStock AS inventory_value
 FROM Products
 ORDER BY inventory_value DESC, ProductName;
